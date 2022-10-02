@@ -2,14 +2,14 @@ import { memo } from "react";
 
 
 
-export interface List {
+export interface ListType {
     id: number;
     text: string;
     checked: boolean;
     onToggle: (id: number) => void;
 }
 
-const TodoList = ({ id, text, checked, onToggle }: List) => {
+const TodoList = ({ id, text, checked, onToggle }: ListType) => {
     return <li style={{ display: "flex" }}>
         <input type="checkbox" onChange={() => onToggle(id)} checked={checked} />
         <p>{text}</p>
