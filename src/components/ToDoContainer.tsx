@@ -4,7 +4,7 @@ import { useCallback, useReducer } from "react";
 
 function MakeDummy() {
     const data = [];
-    for (let i = 0; i < 2500; i++) {
+    for (let i = 0; i < 3; i++) {
         data.push({ id: i + 1, text: "할 일 #" + (i + 1), checked: false });
     }
     return data;
@@ -20,12 +20,12 @@ const ListReducer = (lists: ListType[], action: ActionType): ListType[] => {
         case 'TOGGLE':
             return lists.map((list: ListType) => list.id === action.id ? { ...list, checked: !list.checked } : list)
         default:
-            return lists
+            return lists || []
     }
 }
 
 const ToDoContainer = () => {
-    const [lists, dispatch] = useReducer<(lists: ListType[], action: ActionType) => any, any>(ListReducer, undefined, MakeDummy);
+    const [lists, dispatch] = useReducer<(lists: ListType[], action: ActionType) => ListType[] | any, undefined>(ListReducer, undefined, MakeDummy);
 
     const onToggle = useCallback((id: number) => {
         // @ts-ignore
